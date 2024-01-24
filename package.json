@@ -1,0 +1,13 @@
+{
+  "name": "codebase-next-dual",
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "create-next-app-ts": "^0.0.3"
+  },
+  "scripts": {
+    "dev": "yarn workspaces foreach -Rpt --from '{pc,mo}' run dev"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
