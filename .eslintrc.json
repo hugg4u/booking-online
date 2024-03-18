@@ -45,7 +45,8 @@
         "postcss.config.js",
         "postcss.config.cjs",
         "/app/libs/prismadb.ts",
-        "next.config.js"
+        "next.config.js",
+        "next.config.mjs"
     ],
     "rules": {
         "no-param-reassign": ["error", { "props": false }],
