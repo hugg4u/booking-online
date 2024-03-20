@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import router from './app/routers';
 
 dotenv.config();
 
@@ -27,3 +28,5 @@ const server = http.createServer(app);
 server.listen(PORT, () => {
     console.log(`Server running http://localhost:${PORT}/`);
 });
+
+app.use('/', router());
