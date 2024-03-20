@@ -1,9 +1,9 @@
 export type SuccessResponseType = {
     data: {
         data: Record<string, string | string[] | number | Date>;
-        meta_data: Record<string, string>;
+        meta_data?: Record<string, string>;
     };
-    message: string | undefined;
+    message?: string;
 };
 
 export type ErrorResponseType = {
@@ -25,3 +25,9 @@ export const SUCCESS_RES: SuccessResponseType = {
 };
 
 export const SALT: number = 10;
+
+export const { TOKEN_KEY } = process.env;
+
+export const EXPIRES_TOKEN = '2d';
+
+export const TOKEN_TYPE = 'Bearer';

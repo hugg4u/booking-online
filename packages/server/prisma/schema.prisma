@@ -29,15 +29,11 @@ model User {
 
 model Account{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  type String 
+  userId String @db.ObjectId  
   refresh_token String? @db.String
   access_token String? @db.String
-  expires_at Int?
-  token_type String?
-  scope String?
-  id_token String? @db.String
-  session_state String?
+  expires_at String?
+  token_type String?    
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade) 
 }

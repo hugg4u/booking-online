@@ -1,7 +1,15 @@
 import { Request, Response } from 'express';
-import { hashSync } from 'bcrypt';
+import { compareSync, hashSync } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { db } from '../../lib/db';
-import { ERROR_RES, SALT, SuccessResponseType } from '../../constant';
+import {
+    ERROR_RES,
+    EXPIRES_TOKEN,
+    SALT,
+    SuccessResponseType,
+    TOKEN_KEY,
+    TOKEN_TYPE,
+} from '../../constant';
 
 export const signup = async (req: Request, res: Response) => {
     const { password, name, email } = req.body;
@@ -36,9 +44,55 @@ export const signup = async (req: Request, res: Response) => {
     return res.status(200).json(successObj);
 };
 
-// export const login = async (req: Request, res: Response) => {
-//     const { username, password } = req.body;
+export const loginUser = async (req: Request, res: Response) => {
+    const { email, password } = req.body;
 
-//     let user = await db.
+    if (!email || !password) {
+        return res.status(400).json({
+            message: 'Wrong email or password!',
+        });
+    }
 
-// };
+    const user = await db.user.findFirst({ where: { email } });
+
+    if (!user) {
+        return res.status(400).json({
+            message: 'Account invalid!',
+        });
+    }
+
+    const isCorrectPassword = await compareSync(password, user.hashedPassword);
+
+    if (!isCorrectPassword) {
+        return res.status(403).json({
+            message: 'Wrong password!',
+        });
+    }
+
+    const token = jwt.sign(
+        { id: user.id, email: user.email, name: user.name },
+        TOKEN_KEY,
+        { expiresIn: EXPIRES_TOKEN }
+    );
+
+    const updateUserToken = await db.account.create({
+        data: {
+            token_type: TOKEN_TYPE,
+            userId: user.id,
+            access_token: token,
+        },
+    });
+
+    const successObj: SuccessResponseType = {
+        data: {
+            data: {
+                name: user.name,
+                email: user.email,
+                access_token: updateUserToken.access_token,
+            },
+        },
+        message: 'Login successfully!',
+    };
+
+    return res.status(200).json(successObj);
+};
