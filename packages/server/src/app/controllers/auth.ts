@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { hashSync } from 'bcrypt';
-import { db } from '../lib/db';
-import { ERROR_RES, SALT, SuccessResponseType } from '../constant';
+import { db } from '../../lib/db';
+import { ERROR_RES, SALT, SuccessResponseType } from '../../constant';
 
 export const signup = async (req: Request, res: Response) => {
     const { password, name, email } = req.body;
