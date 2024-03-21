@@ -1,26 +1,21 @@
-/* eslint-disable consistent-return */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import { TOKEN_KEY } from '../constant';
+import { getToken } from '../lib/utils';
 
 export const isAuthenticated = (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const accessToken = req.headers['x-access-token'] as string;
+    const accessToken = getToken(req);
 
     if (!accessToken) {
-        return res.status(401).json({
-            message: 'Authentication required!',
-        });
+        res.sendStatus(401);
     }
 
-    try {
-        const tokenDecoded = jwt.verify(accessToken, TOKEN_KEY);
+    jwt.verify(accessToken, TOKEN_KEY, (err) => {
+        if (err) res.sendStatus(403);
         next();
-    } catch (error) {
-        return res.status(400).json({ message: 'Invalid token!' });
-    }
+    });
 };

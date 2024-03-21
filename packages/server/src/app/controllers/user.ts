@@ -3,15 +3,26 @@ import { jwtDecode } from 'jwt-decode';
 import { SuccessResponseType } from '../../constant';
 import { db } from '../../lib/db';
 import { TokenDecoded } from '../../types';
+import { getToken } from '../../lib/utils';
 
 export const getUser = async (req: Request, res: Response) => {
-    const accessToken = req.headers?.['x-access-token'] as string;
+    const accessToken = getToken(req);
 
     const tokenDecoded = jwtDecode(accessToken) as TokenDecoded;
 
     const user = await db.user.findUnique({
         where: {
             id: tokenDecoded.id,
+        },
+        select: {
+            name: true,
+            email: true,
+            image: true,
+            role: {
+                select: {
+                    name: true,
+                },
+            },
         },
     });
 
