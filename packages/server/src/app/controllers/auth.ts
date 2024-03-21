@@ -19,12 +19,6 @@ export const signup = async (req: Request, res: Response) => {
         where: { email },
     });
 
-    const role = await db.role.findFirst({
-        where: {
-            name: 'USER',
-        },
-    });
-
     if (user) {
         return res.status(400).json({
             ...ERROR_RES,
@@ -37,7 +31,6 @@ export const signup = async (req: Request, res: Response) => {
             name,
             email,
             hashedPassword: hashSync(password, SALT),
-            roleId: role.id,
         },
     });
 
@@ -61,7 +54,11 @@ export const loginUser = async (req: Request, res: Response) => {
         });
     }
 
-    const user = await db.user.findFirst({ where: { email } });
+    const user = await db.user.findFirst({
+        where: {
+            email,
+        },
+    });
 
     if (!user) {
         return res.status(400).json({
@@ -109,11 +106,7 @@ export const loginUser = async (req: Request, res: Response) => {
                     token_type: true,
                 },
             },
-            role: {
-                select: {
-                    name: true,
-                },
-            },
+            role: true,
         },
     });
 
@@ -122,6 +115,7 @@ export const loginUser = async (req: Request, res: Response) => {
             data: {
                 name: responseUser.name,
                 email: responseUser.email,
+                role: responseUser.role,
                 access_token: updateUserToken.access_token,
                 refresh_token: updateUserToken.refresh_token,
                 token_type: updateUserToken.token_type,

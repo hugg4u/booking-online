@@ -18,11 +18,7 @@ export const getUser = async (req: Request, res: Response) => {
             name: true,
             email: true,
             image: true,
-            role: {
-                select: {
-                    name: true,
-                },
-            },
+            role: true,
         },
     });
 
