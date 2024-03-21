@@ -933,6 +933,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.28.6":
+  version: 5.28.6
+  resolution: "@tanstack/query-core@npm:5.28.6"
+  checksum: bfbbf7b11a3bf97ba6c2a5ff5e78de778f713e63e8682561f0529f5c2cc65020a71fddd849de95337b46be90feae3f1ec54833f0faf1e343cd285c022d927967
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.28.6":
+  version: 5.28.6
+  resolution: "@tanstack/react-query@npm:5.28.6"
+  dependencies:
+    "@tanstack/query-core": "npm:5.28.6"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 8b36266181eeadc2f2a0135269aab128e5b1c3ef94b06f80360893b332a6cd1757fc445195bb14c47721b76f8e59921b22680fa9751c8d1fc3b2ddb7a9725276
+  languageName: node
+  linkType: hard
+
 "@tsconfig/node10@npm:^1.0.7":
   version: 1.0.9
   resolution: "@tsconfig/node10@npm:1.0.9"
@@ -2268,6 +2286,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "clsx@npm:2.1.0"
+  checksum: c09c00ad14f638366ca814097e6cab533dfa1972a358da5b557be487168acbb25b4c1395e89ffa842a8a61ba87a462d2b4885bc9d4f8410b598f3cb339599cdb
+  languageName: node
+  linkType: hard
+
 "codebase-next-dual@workspace:.":
   version: 0.0.0-use.local
   resolution: "codebase-next-dual@workspace:."
@@ -2275,6 +2300,7 @@ __metadata:
     "@ant-design/icons": "npm:^4.8.2"
     "@babel/runtime": "npm:^7.24.0"
     "@gumlet/react-hls-player": "npm:^1.0.1"
+    "@tanstack/react-query": "npm:^5.28.6"
     "@types/eslint": "npm:^8"
     "@types/react": "npm:^18.2.66"
     "@types/react-syntax-highlighter": "npm:^15.5.11"
@@ -2282,6 +2308,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.2.0"
     antd: "npm:^5.15.3"
     babel-plugin-import: "npm:^1.13.8"
+    clsx: "npm:^2.1.0"
     create-next-app-ts: "npm:^0.0.3"
     eslint: "npm:^8.57.0"
     eslint-config-airbnb: "npm:^19.0.4"
@@ -2302,7 +2329,9 @@ __metadata:
     next-transpile-modules: "npm:^10.0.1"
     prettier: "npm:^3.2.5"
     prettier-plugin-tailwindcss: "npm:^0.5.12"
+    tailwind-merge: "npm:^2.2.2"
     typescript: "npm:^5.4.2"
+    zustand: "npm:^4.5.2"
   languageName: unknown
   linkType: soft
 
@@ -7614,6 +7643,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tailwind-merge@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "tailwind-merge@npm:2.2.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.24.0"
+  checksum: 68a5e199848a467aed4f8d1a8d7b6a5b583ff72f1d2801e018bf245eaa41e6564b63ead9e2b708a214cefbd843970c5e0a21754d5f2a20e2c1238e25955685ce
+  languageName: node
+  linkType: hard
+
 "tailwindcss@npm:^3.3.0":
   version: 3.4.1
   resolution: "tailwindcss@npm:3.4.1"
@@ -8253,5 +8291,25 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.5.2":
+  version: 4.5.2
+  resolution: "zustand@npm:4.5.2"
+  dependencies:
+    use-sync-external-store: "npm:1.2.0"
+  peerDependencies:
+    "@types/react": ">=16.8"
+    immer: ">=9.0.6"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: aee26f11facebb39b016e89539f72a72c2c00151208907fc909c3cedd455728240e09e01d98ebd3b63a2a3518a5917eac5de6c853743ca55a1655296d750bb48
   languageName: node
   linkType: hard
